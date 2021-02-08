@@ -1,3 +1,19 @@
+New Team – CBI Officers: 
+There are two CBI teams investigating a case separately. One team contains M officers and other team contains N officers. The program must accept
+the name and the experience (in years) of each officer in both teams as the input. The government has decided to form a new team of X officers based on the following 
+conditions.
+    – At least two officers from each team must be included in the new team.
+    – More experienced officers are preferred than less experienced officers.
+    – If two or more officers have the same experience, the name must be given priority (ascending order).
+The value of X is also passed as the input to the program. The program must print the names of the officers in the new team based on the experience in descending order. 
+If two or more officers have the same experience, then sort those officers based on the name in ascending order.
+
+Boundary Condition(s):
+2 <= M, N <= 20
+1 <= Length of each officer’s name <= 20
+1 <= Experience of each officer <= 25
+4 <= X <= M+N
+
 const readline = require('readline');
 const process = require('process');
 const reader = readline.createInterface ({
@@ -13,7 +29,7 @@ reader.on ('line', (input) => {
 });
 
 reader.on ('close', function () {
-    var M = +lines[0], len = lines.length-1, N;
+    var M = +lines[0], len = lines.length-1, N
     var MOfficers = new Map(), NOfficers = new Map ();
     for (let i = 1; i <= M; i++) {
         [key, value] = lines[i].split(' ');
@@ -71,6 +87,7 @@ function sortBasedOnExp (iter) {
 }
 
 /*
+Sample Input/Output1 :
 4
 Abc 2
 Bcd 4
@@ -82,6 +99,15 @@ Efg 1
 Fgh 3
 6
 
+Output :
+Cde
+Def
+Bcd
+Fgh
+Ghi
+Abc
+
+Sample Input/Output 2 :
 3
 ABC 7
 xyz 5
@@ -92,9 +118,14 @@ Def 5
 Stu 5
 5
 
+Output :
+ABC
+Def
+PQR
+Stu
+mno
 
-Input:
-
+Sample Input/Output 3 :
 17
 IrsIUdYDCTW 15
 oWPXugekxnjavkNp 14
@@ -129,5 +160,15 @@ B 1
 GIrgAWdvMNQiBWuBUGyr 2
 10
 
-
+Output :
+HXrQ
+AJtxMBvShFz
+br
+HwiQVPPMAmRgZwhuYGwD
+sGtvQuaHCEQWBtrenVpw
+nRILDBIYKO
+IReHnIVSYFV
+NILZMpIYCQgsvTirCSi
+tlwUYtJ
+BwOFIJwuIEs
 */
