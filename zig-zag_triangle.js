@@ -113,4 +113,14 @@ reader.on ('close', function () {
         c+=2;
     }
     
+//     if the above code fails in any testCase then probably use the below code
+//     var str = lines[0].trim() + '#'.repeat (10000), N = +lines[1].trim(), c= 0;
+//     for (let i = 1; i <= N; i++) {
+//         if (i == 1 || i % 2 == 0)
+//         console.log ('*'.repeat (N-i).concat (str.slice(c, c+(i*2-1))));
+//         else 
+//         console.log ('*'.repeat (N-i).concat(str.slice(c, c+(i*2-1)).split('').reverse().join('')));
+//         c += (i*2-1);
+//     }
+    
 });
