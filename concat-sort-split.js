@@ -37,6 +37,8 @@ reader.on ('close', function () {
             while (pos !== -1) {
                 st = pos;
                 pos = concat.indexOf (v, pos+1);
+                if (l == checked.count (v)) break;
+                l++;
             }
             st *= k;
             while (t) {
