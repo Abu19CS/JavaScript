@@ -13,6 +13,18 @@ reader.on ('line', (input) => {
 });
 
 reader.on ('close', function () {
+    
+    Object.defineProperties (Array.prototype, {
+        count: {
+            value : function (val) {
+                return this.filter (v => v == val).length;
+            }, 
+            writable: true,
+            enumerable: true,
+            configurable: false,
+        }
+    });
+
     var list = lines[0].split(' ');
     var k = +lines[1], concat = [], results = [], pos, ind;
     for (let i = 0; i < list.length; i+=k) {
