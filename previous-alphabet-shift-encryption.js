@@ -80,3 +80,14 @@ reader.on('close', function () {
 
     console.log (res.join(''));
 });
+
+
+/**
+hel#121#LO
+hmq#121#XA
+
+
+
+1#2@3chO*cO#Cook#IE72
+1#2@3ckW*rR#Rrdz#TN72
+ */
