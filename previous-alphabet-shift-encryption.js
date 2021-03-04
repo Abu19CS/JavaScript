@@ -59,14 +59,17 @@ reader.on('close', function () {
                 var lPos = lastChar.pop();
                 var c = str.charAt (lPos);
                 if ((c >= 'a' && c <= 'z') && (curr >= 'a' && curr <= 'z')) {
+                    lastChar.push (i);
                     a = (lower.indexOf (c) + lower.indexOf (curr) + 1) % 26;
                     res.push (lower.charAt (a));
                 }
                 else if ((c >= 'A' && c <= 'Z') && (curr >= 'A' && curr <= 'Z')) {
+                    lastChar.push (i);
                     a = (upper.indexOf (c) + upper.indexOf (curr) + 1) % 26;
                     res.push (upper.charAt (a));
                 }
                 else if ((c >= 'a' && c <= 'z') && (curr >= 'A' && curr <= 'Z')) {
+                    lastChar.push (i);
                     a = (lower.indexOf (c) + upper.indexOf (curr) + 1) % 26;
                     res.push (upper.charAt (a));
                 }
@@ -80,7 +83,6 @@ reader.on('close', function () {
 
     console.log (res.join(''));
 });
-
 
 /**
 hel#121#LO
