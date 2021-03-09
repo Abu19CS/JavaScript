@@ -1,53 +1,69 @@
-const prompt = require ('prompt-sync')();
+const readline = require('readline');
+const reader = readline.createInterface ({
+    input: process.stdin,
+    output: process.stdout,
+    terminal: true,
+});
 
-var str = prompt().split(' '), result = [];
-var nums = [], break_pos = [];
-for (let i = 0; i < str.length; i++) {
-    let s = str[i], l = s.length, temp = [], added = 0;
-    for (let j = l - 1; j >= 0; j--) {
-        if (s[j] >= '0' && s[j] <= '9') {
-            temp.push (s[j]);
-            added = 1;
-        } else {
-            break_pos.push (j+1);
-            break;
+var lines = [];
+
+reader.on ('line', (input) => {
+    lines.push (input);
+});
+
+
+reader.on ('close', function () {
+    var str = lines[0].split(' '), result = [];
+    var nums = [], break_pos = [];
+    for (let i = 0; i < str.length; i++) {
+        let s = str[i], l = s.length, temp = [], added = 0;
+        for (let j = l - 1; j >= 0; j--) {
+            if (s[j] >= '0' && s[j] <= '9') {
+                temp.push (s[j]);
+                added = 1;
+            } else {
+                break_pos.push (j+1);
+                break;
+            }
         }
-    }
-    if (added == 0) {
-        nums.push (' ');
-    }
-    else nums.push (temp.reverse().join(''))
-}
-
-var modified = [];
-
-for (let i = 0; i < nums.length; i++) {
-    var init_str = nums[i].split (''), pad, res , ad = i+1;
-    if (init_str[0] === '0') {
-        let pos = init_str.indexOf ('0'), c =0;
-        while (pos !== -1) {
-            c++;
-            pos = init_str.indexOf ('0', pos+1);
+        if (added == 0) {
+            nums.push (' ');
         }
-        pad = String(parseInt((init_str.slice (c, init_str.length).join(''))) + ad);
-        res = ''.padStart (init_str.length - pad.length, '0') + pad;
-        modified.push (res);
+        else nums.push (temp.reverse().join(''))
     }
-    else modified.push (String(parseInt(init_str.join('')) + ad));
-}
 
-for (let i = 0; i < modified.length; i++) {
-    var s = str[i].length, s_pos = break_pos[i], ins = modified[i];
-    var res = str[i].split('')
-    if (ins === 'NaN') {
-        res.splice (s_pos, 0, '1');
+    var modified = [];
+
+    for (let i = 0; i < nums.length; i++) {
+        var init_str = nums[i].split (''), pad, res , ad = i+1;
+        if (init_str[0] === '0') {
+            let pos = init_str.indexOf ('0'), c =0;
+            while (pos !== -1) {
+                c++;
+                pos = init_str.indexOf ('0', pos+1);
+            }
+            pad = String(parseInt((init_str.slice (c, init_str.length).join(''))) + ad);
+            res = ''.padStart (init_str.length - pad.length, '0') + pad;
+            modified.push (res);
+        }
+        else modified.push (String(parseInt(init_str.join('')) + ad));
     }
-    else {
-        res.splice (s_pos, s - s_pos, ...ins.split(''));
+
+    for (let i = 0; i < modified.length; i++) {
+        var s = str[i].length, s_pos = break_pos[i], ins = modified[i];
+        var res = str[i].split('')
+        if (ins === 'NaN') {
+            res.splice (s_pos, 0, '1');
+        }
+        else {
+            res.splice (s_pos, s - s_pos, ...ins.split(''));
+        }
+        result.push (res.join(''));
     }
-    result.push (res.join(''));
-}
-console.log (result.join(' '));
+    console.log (result.join(' '));
+})
+
+
 
 /*
 
